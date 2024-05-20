@@ -109,7 +109,13 @@ class EcomExpApi(Resource):
       resp = http.request("GET", "http://168.119.225.15:36000/proc/booking/{transport_type}/routes?departureCode={departure_code}&destinationCode={destination_code}".format(transport_type=transport_type, departure_code=departure_code, destination_code=destination_code))
       resp_payload = json.loads(resp.data.decode("utf-8"))
 
-      resp_list = resp_payload
+      tmp_resp_list = []
+      for resp in resp_payload:
+        for r in resp.get("routes", []):
+          tmp_resp_list.append(r)
+        # end for
+      # end for
+      resp_list = set(tmp_resp_list)
 
       end_timestamp = datetime.now()
       duration = int((end_timestamp - start_timestamp).total_seconds() * 1000)
@@ -135,7 +141,13 @@ class MyCompProcApiDefault(Resource):
       resp = http.request("GET", "http://168.119.225.15:36000/proc/booking/{transport_type}/routes?departureCode={departure_code}&destinationCode={destination_code}".format(transport_type=transport_type, departure_code=departure_code, destination_code=destination_code))
       resp_payload = json.loads(resp.data.decode("utf-8"))
 
-      resp_list = resp_payload
+      tmp_resp_list = []
+      for resp in resp_payload:
+        for r in resp.get("routes", []):
+          tmp_resp_list.append(r)
+        # end for
+      # end for
+      resp_list = set(tmp_resp_list)
 
       end_timestamp = datetime.now()
       duration = int((end_timestamp - start_timestamp).total_seconds() * 1000)
