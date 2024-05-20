@@ -118,7 +118,8 @@ class EcomExpApi(Resource):
 
       token = auth().get("token", "")
       if not is_token_validated(token):
-        return jsonify({"message": "Authentication failed"}), 401
+        response = Response(response={"message": "Authentication failed"}, status=401, mimetype='application/json')
+        return response
       # end if
 
       # Parse arguments
@@ -157,7 +158,8 @@ class MyCompProcApiDefault(Resource):
 
       token = auth().get("token", "")
       if not is_token_validated(token):
-        return jsonify({"message": "Authentication failed"}), 401
+        response = Response(response={"message": "Authentication failed"}, status=401, mimetype='application/json')
+        return response
       # end if
 
       # Parse arguments
