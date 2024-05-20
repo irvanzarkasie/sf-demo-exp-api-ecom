@@ -98,6 +98,7 @@ def logResponse(response, rqid="", message="Return response", duration=0, rqtime
 def auth():
     resp = http.request("GET", "http://168.119.225.15:34110/auth/exchange_token?client_id={CLIENT_ID}".format(CLIENT_ID=CLIENT_ID))
     resp_payload = json.loads(resp.data.decode("utf-8"))
+    return resp_payload
 # end def
 
 class EcomExpApi(Resource):
