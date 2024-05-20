@@ -15,6 +15,7 @@ import uuid
 from time import sleep
 import logging
 from logging.handlers import TimedRotatingFileHandler, RotatingFileHandler
+import jwt
 
 app = Flask(__name__)
 api = Api(app)
@@ -23,6 +24,8 @@ api = Api(app)
 api_host = socket.gethostname()
 api_port = 37000
 api_id = "ecom_exp_api"
+
+CLIENT_ID = "8373854997-of44d9n5qupldqhlc5hh9h99d2q6rfk5.apps.googleusercontent.com"
 
 # Work directory setup
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -92,9 +95,18 @@ def logResponse(response, rqid="", message="Return response", duration=0, rqtime
   logger.info(json.dumps(logpayload))
 # end def
 
+def auth():
+    resp = http.request("GET", "http://168.119.225.15:34110/auth/exchange_token?client_id={CLIENT_ID}".format(CLIENT_ID=CLIENT_ID))
+    resp_payload = json.loads(resp.data.decode("utf-8"))
+# end def
+
 class EcomExpApi(Resource):
     def get(self, transport_type):
       start_timestamp = datetime.now()
+
+      token = auth()
+      print(token)
+
       # Parse arguments
       args = request.args
       transport_type = transport_type
@@ -128,6 +140,10 @@ class EcomExpApi(Resource):
 class MyCompProcApiDefault(Resource):
     def get(self):
       start_timestamp = datetime.now()
+
+      token = auth()
+      print(token)
+
       # Parse arguments
       args = request.args
       transport_type = transport_type
