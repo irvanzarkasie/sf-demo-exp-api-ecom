@@ -108,7 +108,7 @@ def is_token_validated(token):
       return decoded_token.get("expired_time", 0) > int(datetime.now().timestamp()) and decoded_token.get("client_id", "") == CLIENT_ID
     # end try
     except Exception as e:
-      return false
+      return False
     # end except
 # end def
 
