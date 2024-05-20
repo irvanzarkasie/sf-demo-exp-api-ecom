@@ -140,7 +140,7 @@ class MyCompProcApiDefault(Resource):
     # end def
 # end class
 
-api.add_resource(MyCompProcApi, '/ecom/exp/booking/<transport_type>/routes')
+api.add_resource(EcomExpApi, '/ecom/exp/booking/<transport_type>/routes')
 api.add_resource(MyCompProcApiDefault, '/ecom/exp/booking/routes')
 
 if __name__ == '__main__':
