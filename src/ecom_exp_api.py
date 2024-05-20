@@ -111,7 +111,7 @@ class EcomExpApi(Resource):
     def get(self, transport_type):
       start_timestamp = datetime.now()
 
-      token = auth()
+      token = auth().get("token", "")
       print(is_token_validated(token))
 
       # Parse arguments
@@ -148,7 +148,7 @@ class MyCompProcApiDefault(Resource):
     def get(self):
       start_timestamp = datetime.now()
 
-      token = auth()
+      token = auth().get("token", "")
       print(is_token_validated(token))
 
       # Parse arguments
