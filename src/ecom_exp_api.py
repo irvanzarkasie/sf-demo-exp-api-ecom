@@ -103,8 +103,13 @@ def auth():
 # end def
 
 def is_token_validated(token):
-    decoded_token = jwt.decode(jwt=token, key=CLIENT_SECRET, algorithms=["HS256"])
-    return decoded_token.get("expired_time", 0) > int(datetime.now().timestamp()) and decoded_token.get("client_id", "") == CLIENT_ID
+    try:
+      decoded_token = jwt.decode(jwt=token, key=CLIENT_SECRET, algorithms=["HS256"])
+      return decoded_token.get("expired_time", 0) > int(datetime.now().timestamp()) and decoded_token.get("client_id", "") == CLIENT_ID
+    # end try
+    except Exception as e:
+      return false
+    # end except
 # end def
 
 class EcomExpApi(Resource):
