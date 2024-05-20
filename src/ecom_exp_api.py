@@ -109,10 +109,12 @@ class EcomExpApi(Resource):
       resp = http.request("GET", "http://168.119.225.15:36000/proc/booking/{transport_type}/routes?departureCode={departure_code}&destinationCode={destination_code}".format(transport_type=transport_type, departure_code=departure_code, destination_code=destination_code))
       resp_payload = json.loads(resp.data.decode("utf-8"))
 
+      resp_list = resp_payload
+
       end_timestamp = datetime.now()
       duration = int((end_timestamp - start_timestamp).total_seconds() * 1000)
       logResponse(json.dumps(resp_list), rqid=correlation_id, message="Return response", duration=duration, rqtimestamp=start_timestamp, request=request, level="INFO", status_code=200)
-      return jsonify(resp_payload)
+      return jsonify(resp_list)
     # end def
 # end class
 
@@ -133,10 +135,12 @@ class MyCompProcApiDefault(Resource):
       resp = http.request("GET", "http://168.119.225.15:36000/proc/booking/{transport_type}/routes?departureCode={departure_code}&destinationCode={destination_code}".format(transport_type=transport_type, departure_code=departure_code, destination_code=destination_code))
       resp_payload = json.loads(resp.data.decode("utf-8"))
 
+      resp_list = resp_payload
+
       end_timestamp = datetime.now()
       duration = int((end_timestamp - start_timestamp).total_seconds() * 1000)
       logResponse(json.dumps(resp_list), rqid=correlation_id, message="Return response", duration=duration, rqtimestamp=start_timestamp, request=request, level="INFO", status_code=200)
-      return jsonify(resp_payload)
+      return jsonify(resp_list)
     # end def
 # end class
 
