@@ -26,7 +26,7 @@ api_port = 37000
 api_id = "ecom_exp_api"
 
 CLIENT_ID = "8373854997-of44d9n5qupldqhlc5hh9h99d2q6rfk5.apps.googleusercontent.com"
-CLIENT_SECRET = "__a3b762f871cdb3bae0044c649622fc1396eda3e3"
+CLIENT_SECRET = "a3b762f871cdb3bae0044c649622fc1396eda3e3"
 
 # Work directory setup
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -119,7 +119,7 @@ class EcomExpApi(Resource):
       token = auth().get("token", "")
       if not is_token_validated(token):
         response = Response(response={"message": "Authentication failed"}, status=401, mimetype='application/json')
-        response.headers['Content-Type'] = 'application/json; charset=utf-8'
+        response.headers['Content-Type'] = 'application/json'
         return response
       # end if
 
@@ -160,7 +160,7 @@ class MyCompProcApiDefault(Resource):
       token = auth().get("token", "")
       if not is_token_validated(token):
         response = Response(response={"message": "Authentication failed"}, status=401, mimetype='application/json')
-        response.headers['Content-Type'] = 'application/json; charset=utf-8'
+        response.headers['Content-Type'] = 'application/json'
         return response
       # end if
 
