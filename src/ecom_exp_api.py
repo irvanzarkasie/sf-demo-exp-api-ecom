@@ -115,7 +115,7 @@ class EcomExpApi(Resource):
           tmp_resp_list.append(r)
         # end for
       # end for
-      resp_list = set(tmp_resp_list)
+      resp_list = [dict(t) for t in {tuple(d.items()) for d in tmp_resp_list}]
 
       end_timestamp = datetime.now()
       duration = int((end_timestamp - start_timestamp).total_seconds() * 1000)
@@ -147,7 +147,7 @@ class MyCompProcApiDefault(Resource):
           tmp_resp_list.append(r)
         # end for
       # end for
-      resp_list = set(tmp_resp_list)
+      resp_list = [dict(t) for t in {tuple(d.items()) for d in tmp_resp_list}]
 
       end_timestamp = datetime.now()
       duration = int((end_timestamp - start_timestamp).total_seconds() * 1000)
