@@ -112,7 +112,9 @@ class EcomExpApi(Resource):
       start_timestamp = datetime.now()
 
       token = auth().get("token", "")
-      print(is_token_validated(token))
+      if not is_token_validated(token):
+        return jsonify({"message": "Authentication failed"}, 401)
+      # end if
 
       # Parse arguments
       args = request.args
@@ -149,7 +151,9 @@ class MyCompProcApiDefault(Resource):
       start_timestamp = datetime.now()
 
       token = auth().get("token", "")
-      print(is_token_validated(token))
+      if not is_token_validated(token):
+        return jsonify({"message": "Authentication failed"}, 401)
+      # end if
 
       # Parse arguments
       args = request.args
