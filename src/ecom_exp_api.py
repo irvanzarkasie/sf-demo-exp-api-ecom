@@ -26,6 +26,7 @@ api_port = 37000
 api_id = "ecom_exp_api"
 
 CLIENT_ID = "8373854997-of44d9n5qupldqhlc5hh9h99d2q6rfk5.apps.googleusercontent.com"
+CLIENT_SECRET = "a3b762f871cdb3bae0044c649622fc1396eda3e3"
 
 # Work directory setup
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -101,12 +102,17 @@ def auth():
     return resp_payload
 # end def
 
+def is_token_validated(token):
+    decoded_token = jwt.decode(jwt=token, key=CLIENT_SECRET, algorithms=["HS256"])
+    return decoded_token.get("expired_time", 0) > int(datetime.now().timestamp()) and decoded_token.get("client_id", "") == CLIENT_ID
+# end def
+
 class EcomExpApi(Resource):
     def get(self, transport_type):
       start_timestamp = datetime.now()
 
       token = auth()
-      print(token)
+      print(is_token_validated(token))
 
       # Parse arguments
       args = request.args
@@ -143,7 +149,7 @@ class MyCompProcApiDefault(Resource):
       start_timestamp = datetime.now()
 
       token = auth()
-      print(token)
+      print(is_token_validated(token))
 
       # Parse arguments
       args = request.args
